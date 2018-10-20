@@ -1,0 +1,14 @@
+provider "aws" {
+  access_key = "AKIAIINH5I5AGJEHCZDQ"
+  secret_key = "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"
+  region = "ap-south-1a"
+}
+variable "count" {
+default=2
+}
+resource "aws_instance" "Test" {
+count="2"
+  ami           = "ami-0d773a3b7bb2bb1c1"
+  instance_type = "t2.micro"
+  tags { Name="${format("MSR-test-Instance-%01d",count.index+1)}" }
+}
